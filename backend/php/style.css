@@ -4,19 +4,31 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-}
 
+
+:root {
+    --container-offset-top: 140px;
+    --container-offset-left: 56px;
+    --container-max-width: 960px;
+} 
 /* Center the #forms container in the middle of the viewport */
 body {
-    display: flex;
-    align-items: center; /* vertical centering */
-    justify-content: center; /* horizontal centering */
     background: #2e2e2e;
     font-family: Arial, Helvetica, sans-serif;
+    min-height: 100%;
 }
 
+body.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 80px 16px 40px;
+}
+
+body.profile-page {
+    display: block;
+}
 
 #aanmelden {
     display: none;
@@ -113,6 +125,19 @@ body {
     object-fit: contain;
 }
 
+body.auth-page #navbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(760px, 90%) !important;
+    z-index: 1050;
+}
+
+body.auth-page #forms {
+    margin: 0;
+}
+
 @media (max-width: 420px) {
     #navbar {
         top: 6px;
@@ -143,4 +168,52 @@ a#aanmeldLink {
 /* small hover affordance */
 a#aanmeldLink:hover {
     text-decoration: underline;
+}
+
+.container {
+    width: min(var(--container-max-width), calc(100% - 2 * var(--container-offset-left)));
+    margin: var(--container-offset-top) 0 0 var(--container-offset-left);
+    padding: 0;
+    color: white;
+}
+
+.container--card {
+    width: fit-content;
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    :root {
+        --container-offset-top: 128px;
+        --container-offset-left: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --container-offset-top: 110px;
+        --container-offset-left: 20px;
+    }
+}
+
+@media (max-width: 420px) {
+    :root {
+        --container-offset-top: 96px;
+        --container-offset-left: 12px;
+    }
+}
+
+#changeinfo {
+    display: none;
+    width: 220px;
+    margin-top: 50px;
+    background-color: #3cb472;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#gegevens {
+    margin-top: 100px;
+    text-decoration: underline;
+    cursor: pointer;
 }
