@@ -4,14 +4,12 @@
     box-sizing: border-box;
 }
 
-
-
 :root {
     --container-offset-top: 140px;
     --container-offset-left: 56px;
     --container-max-width: 960px;
 } 
-/* Center the #forms container in the middle of the viewport */
+
 body {
     background: #2e2e2e;
     font-family: Arial, Helvetica, sans-serif;
@@ -61,6 +59,36 @@ body.profile-page {
     flex: 1 1 220px;
 }
 
+/* Toast notification styling */
+.toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast.success {
+    background-color: #2e8b57;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
 /* Center navbar if present (override inline width) */
 #navbar {
     width: auto !important;
@@ -75,8 +103,7 @@ body.profile-page {
     padding-right: 1rem;
 }
 
-/* Fixed, centered navbar styling moved from index.html so the navbar is self-contained
-   and can be included on pages without disturbing layout (forms, flex bodies, etc.) */
+
 #navbar {
     position: fixed;
     top: 12px;
@@ -105,7 +132,6 @@ body.profile-page {
     align-items: center;
 }
 
-/* Make navbar links black and remove underlines */
 #navbar a {
     color: #000;
     text-decoration: none;
@@ -205,15 +231,43 @@ a#aanmeldLink:hover {
 
 #changeinfo {
     display: none;
-    width: 220px;
-    margin-top: 50px;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
     background-color: #3cb472;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#changeinfo form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#changeinfo label {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+#changeinfo button {
+    margin-top: 8px;
+    padding: 10px;
+    background-color: #2e2e2e;
+    color: white;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#changeinfo button:hover {
+    background-color: #1a1a1a;
 }
 
 #gegevens {
-    margin-top: 100px;
+    margin-top: 40px;
     text-decoration: underline;
     cursor: pointer;
 }

@@ -9,19 +9,6 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="auth-page">
-    <?php if (!empty($success)): ?>
-        <div class="success-message"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
-
-    <?php if (!empty($errors)): ?>
-        <div class="error-message">
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                    <li><?= htmlspecialchars($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
     <nav id="navbar" role="navigation" aria-label="Main navigation">
         <a class="brand" href="./partijen.html">StemWijzer</a>
         <div class="nav-links">
@@ -30,10 +17,12 @@
         </div>
         <img src="scale_logo.png" alt="logo">
     </nav>
+    <!-- Toast notification for errors/success -->
+    <div id="toast" class="toast"></div>
 
     <div id="forms">
         <div id="login" class="form-panel active">
-            <form method="post" novalidate>
+            <form method="post">
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
                 <div class="form-group">
@@ -53,7 +42,7 @@
         </div>
 
         <div id="aanmelden" class="form-panel">
-            <form method="post" novalidate>
+            <form method="post">
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             
                 <label for="naam">Naam</label>
@@ -86,5 +75,19 @@
     </div>
 
     <script src="./main.js"></script>
+    
+    <?php if (!empty($success)): ?>
+        <script>
+            showToast('<?= addslashes($success) ?>', 'success');
+        </script>
+    <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            <?php foreach ($errors as $error): ?>
+                showToast('<?= addslashes($error) ?>', 'error');
+            <?php endforeach; ?>
+        </script>
+    <?php endif; ?>
 </body>
 </html>

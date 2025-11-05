@@ -1,12 +1,10 @@
-console.log("hdn;ksnfskjdv")
 function main() {
-    console.log("work")
     const logBut = document.getElementById("logBut");
     const signBut = document.getElementById("signBut");
     const inlogForm = document.getElementById("login");
     const aanmeldForm = document.getElementById("aanmelden");
 
-    if (!logBut || !signBut || !inlogForm || !aanmeldForm) return;
+    if (logBut && signBut && inlogForm && aanmeldForm) {
 
     logBut.addEventListener("click", (e) => {
         e.preventDefault();
@@ -19,9 +17,7 @@ function main() {
         aanmeldForm.style.display = "none";
         inlogForm.style.display = "block";
     });
-
-
-
+    }
 }
 main();
 
@@ -30,6 +26,19 @@ const changeInfoPanel = document.getElementById("changeinfo");
 
 if (gegevensTrigger && changeInfoPanel) {
     gegevensTrigger.addEventListener("click", () => {
-        changeInfoPanel.style.display = "block";
+        changeInfoPanel.style.display = "flex";
     });
+}
+
+// Toast notification function
+function showToast(message, type = 'error') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    
+    toast.textContent = message;
+    toast.className = 'toast show ' + type;
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 4000);
 }
