@@ -17,7 +17,6 @@
         </div>
         <img src="scale_logo.png" alt="logo">
     </nav>
-    <!-- Toast notification for errors/success -->
     <div id="toast" class="toast"></div>
 
     <div id="forms">
@@ -67,7 +66,7 @@
                 <input type="password" name="wachtwoord" id="wachtwoord" required 
                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" 
                        title="Min. 8 tekens: 1 hoofdletter, 1 kleine letter, 1 cijfer">
-
+                       
                 <button type="submit" class="inbu" name="signsubmit">Aanmelden</button>
                 <a id="signBut" href="#">Inloggen</a>
             </form>

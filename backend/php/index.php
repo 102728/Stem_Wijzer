@@ -25,7 +25,7 @@ if (isset($_POST['signsubmit'])) {
             if ($stmt->execute([
                 trim($_POST['naam']), 
                 trim($_POST['achternaam']), 
-                $email, 
+                $email,
                 $gebruikersnaam, 
                 password_hash($_POST['wachtwoord'], PASSWORD_BCRYPT)
             ])) {

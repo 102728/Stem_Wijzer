@@ -5,7 +5,6 @@ function main() {
     const aanmeldForm = document.getElementById("aanmelden");
 
     if (logBut && signBut && inlogForm && aanmeldForm) {
-
     logBut.addEventListener("click", (e) => {
         e.preventDefault();
         inlogForm.style.display = "none";
@@ -18,19 +17,123 @@ function main() {
         inlogForm.style.display = "block";
     });
     }
+
+    const gegevensTrigger = document.getElementById("gegevens");
+    const changeInfoPanel = document.getElementById("changeinfo");
+    const partijTrigger = document.getElementById("partij");
+    const maakPartijPanel = document.getElementById("maakPartij");
+    const mijnPartijPanel = document.getElementById("mijnPartij");
+
+    if (gegevensTrigger && changeInfoPanel) {
+        gegevensTrigger.addEventListener("click", () => {
+            if (changeInfoPanel.style.display === "flex") {
+                changeInfoPanel.style.display = "none";
+                // Show mijnPartij again if it exists
+                if (mijnPartijPanel) mijnPartijPanel.style.display = "block";
+            } else {
+                changeInfoPanel.style.display = "flex";
+                if (maakPartijPanel) maakPartijPanel.style.display = "none";
+                if (mijnPartijPanel) mijnPartijPanel.style.display = "none";
+            }
+        });
+    }
+
+    if (partijTrigger) {
+        partijTrigger.addEventListener("click", () => {
+            // Check which panel exists (maakPartij or mijnPartij)
+            if (maakPartijPanel) {
+                if (maakPartijPanel.style.display === "block") {
+                    maakPartijPanel.style.display = "none";
+                } else {
+                    maakPartijPanel.style.display = "block";
+                    if (changeInfoPanel) changeInfoPanel.style.display = "none";
+                }
+            } else if (mijnPartijPanel) {
+                if (mijnPartijPanel.style.display === "block") {
+                    mijnPartijPanel.style.display = "none";
+                } else {
+                    mijnPartijPanel.style.display = "block";
+                    if (changeInfoPanel) changeInfoPanel.style.display = "none";
+                }
+            }
+        });
+    }
 }
 main();
 
-const gegevensTrigger = document.getElementById("gegevens");
-const changeInfoPanel = document.getElementById("changeinfo");
+// Image preview for partij foto
+const partijFotoInput = document.getElementById('partij_foto');
+const imagePreview = document.getElementById('imagePreview');
+const previewImg = document.getElementById('previewImg');
+const removeImageBtn = document.getElementById('removeImage');
 
-if (gegevensTrigger && changeInfoPanel) {
-    gegevensTrigger.addEventListener("click", () => {
-        changeInfoPanel.style.display = "flex";
+if (partijFotoInput && imagePreview && previewImg) {
+    partijFotoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                previewImg.src = event.target.result;
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    if (removeImageBtn) {
+        removeImageBtn.addEventListener('click', function() {
+            partijFotoInput.value = '';
+            previewImg.src = '';
+            imagePreview.style.display = 'none';
+        });
+    }
+}
+
+// Image preview for edit partij foto
+const editPartijFotoInput = document.getElementById('edit_partij_foto');
+const editImagePreview = document.getElementById('editImagePreview');
+const editPreviewImg = document.getElementById('editPreviewImg');
+const removeEditImageBtn = document.getElementById('removeEditImage');
+
+if (editPartijFotoInput && editImagePreview && editPreviewImg) {
+    editPartijFotoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                editPreviewImg.src = event.target.result;
+                editImagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    if (removeEditImageBtn) {
+        removeEditImageBtn.addEventListener('click', function() {
+            editPartijFotoInput.value = '';
+            editPreviewImg.src = '';
+            editImagePreview.style.display = 'none';
+        });
+    }
+}
+
+// Toggle Pas Partij Aan form
+const pasPartijAanBtn = document.getElementById('pasPartijAan');
+const pasPartijAanForm = document.getElementById('pasPartijAanForm');
+const mijnPartijDisplay = document.getElementById('mijnPartij');
+
+if (pasPartijAanBtn && pasPartijAanForm && mijnPartijDisplay) {
+    pasPartijAanBtn.addEventListener('click', function() {
+        if (pasPartijAanForm.style.display === 'block') {
+            pasPartijAanForm.style.display = 'none';
+            mijnPartijDisplay.style.display = 'block';
+        } else {
+            pasPartijAanForm.style.display = 'block';
+            mijnPartijDisplay.style.display = 'none';
+        }
     });
 }
 
-// Toast notification function
 function showToast(message, type = 'error') {
     const toast = document.getElementById('toast');
     if (!toast) return;
