@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* Center the #forms container in the middle of the viewport */
+body {
+    display: flex;
+    align-items: center; /* vertical centering */
+    justify-content: center; /* horizontal centering */
+    background: #3e7158;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#aanmelden {
+    display: none;
+}
+
+#forms {
+    display: flex;
+    gap: 1.2rem;
+    width: auto;
+    max-width: 640px; /* narrower card for a cleaner look */
+    padding: 1.25rem;
+    background: #3cb472;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Stack the forms on small screens for better readability */
+@media (max-width: 640px) {
+    #forms {
+        flex-direction: column;
+        width: 90%;
+        padding: 1rem;
+    }
+}
+
+/* simple styling for child boxes so forms look sensible */
+#forms > div {
+    flex: 1 1 220px;
+}
+
+/* Center navbar if present (override inline width) */
+#navbar {
+    width: auto !important;
+    max-width: 760px;
+    margin: 12px auto;
+    background-color: mediumseagreen !important;
+    border-radius: 10px;
+}
+
+#navbar .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Fixed, centered navbar styling moved from index.html so the navbar is self-contained
+   and can be included on pages without disturbing layout (forms, flex bodies, etc.) */
+#navbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(760px, 90%) !important;
+    max-width: 760px;
+    z-index: 1050;
+    background-color: #3cb472;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#navbar .brand {
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+#navbar .nav-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* Make navbar links black and remove underlines */
+#navbar a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#navbar a:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+#navbar img {
+    margin-left: auto;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+@media (max-width: 420px) {
+    #navbar {
+        top: 6px;
+        width: calc(100% - 16px) !important;
+        left: 8px;
+        transform: none;
+        border-radius: 8px;
+    }
+}
+
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 0.45rem 0.5rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #d7dbe6;
+    border-radius: 4px;
+}
+
+a#aanmeldLink {
+    display: block; /* force the link onto its own line below inputs */
+    margin-top: 0.5rem;
+    color: #2b6ef6;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* small hover affordance */
+a#aanmeldLink:hover {
+    text-decoration: underline;
+}
