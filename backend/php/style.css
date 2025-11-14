@@ -1,3 +1,7 @@
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -16,184 +20,12 @@ body {
     min-height: 100%;
 }
 
-body.auth-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 80px 16px 40px;
-}
-
-body.profile-page {
-    display: block;
-}
-
-#aanmelden {
-    display: none;
-}
-
-#forms {
-    display: flex;
-    gap: 1.2rem;
-    width: auto;
-    max-width: 640px; /* narrower card for a cleaner look */
-    padding: 1.25rem;
-    background: #3cb472;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    align-items: flex-start;
-    justify-content: center;
-}
-
-/* Stack the forms on small screens for better readability */
-@media (max-width: 640px) {
-    #forms {
-        flex-direction: column;
-        width: 90%;
-        padding: 1rem;
-    }
-}
-
-/* simple styling for child boxes so forms look sensible */
-#forms > div {
-    flex: 1 1 220px;
-}
-
-/* Toast notification styling */
-.toast {
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 16px 24px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    max-width: 90%;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.toast.show {
-    opacity: 1;
-}
-
-.toast.success {
-    background-color: #2e8b57;
-}
-
-.toast.error {
-    background-color: #dc3545;
-}
-
-/* Center navbar if present (override inline width) */
-#navbar {
-    width: auto !important;
-    max-width: 760px;
-    margin: 12px auto;
-    background-color: mediumseagreen !important;
-    border-radius: 10px;
-}
-
-#navbar .container-fluid {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-
-#navbar {
-    position: fixed;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(760px, 90%) !important;
-    max-width: 760px;
-    z-index: 1050;
-    background-color: #3cb472;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-#navbar .brand {
-    font-weight: 700;
-    margin-right: 8px;
-}
-
-#navbar .nav-links {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
-
-#navbar a {
-    color: #000;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-#navbar a:hover {
-    color: #000;
-    text-decoration: none;
-    opacity: 0.85;
-}
-
-#navbar img {
-    margin-left: auto;
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-}
-
-body.auth-page #navbar {
-    position: fixed;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(760px, 90%) !important;
-    z-index: 1050;
-}
-
-body.auth-page #forms {
-    margin: 0;
-}
-
-@media (max-width: 420px) {
-    #navbar {
-        top: 6px;
-        width: calc(100% - 16px) !important;
-        left: 8px;
-        transform: none;
-        border-radius: 8px;
-    }
-}
-
-
 input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
     padding: 0.45rem 0.5rem;
     margin-bottom: 0.75rem;
     border: 1px solid #d7dbe6;
     border-radius: 4px;
-}
-
-a#aanmeldLink {
-    display: block; /* force the link onto its own line below inputs */
-    margin-top: 0.5rem;
-    color: #2b6ef6;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-/* small hover affordance */
-a#aanmeldLink:hover {
-    text-decoration: underline;
 }
 
 .container {
@@ -229,79 +61,429 @@ a#aanmeldLink:hover {
     }
 }
 
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+
+#navbar {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(760px, 90%) !important;
+    max-width: 760px;
+    z-index: 1050;
+    background-color: #2e8b57;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: top 0.3s ease;
+}
+
+#navbar.hidden {
+    top: -80px;
+}
+
+#navbar .brand {
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+#navbar .nav-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+#navbar a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#navbar a:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+#navbar img {
+    margin-left: auto;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+@media (max-width: 420px) {
+    #navbar {
+        top: 6px;
+        width: calc(100% - 16px) !important;
+        left: 8px;
+        transform: none;
+        border-radius: 5px;
+    }
+}
+
+
+/* ============================================
+   TOAST NOTIFICATIONS
+   ============================================ */
+
+.toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast.success {
+    background-color: #2e8b57;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+
+/* ============================================
+   LOGIN/SIGNUP PAGE (index_view.php)
+   ============================================ */
+
+/* ============================================
+   LOGIN/SIGNUP PAGE (index_view.php)
+   ============================================ */
+
+body.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-color: rgb(50, 50, 50);
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+    background: #3a3a3a;
+    border-radius: 6px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.auth-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px 0;
+}
+
+.auth-header p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.auth-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.auth-form label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.auth-form input {
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.auth-form select {
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.auth-form select option {
+    background: #2e2e2e;
+    color: #fff;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+    outline: none;
+    border-color: #2e8b57;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.auth-form input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.auth-btn {
+    margin-top: 10px;
+    padding: 14px;
+    background: #2e8b57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.auth-btn:hover {
+    background: #267347;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-switch a {
+    color: #2e8b57;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+}
+
+.auth-switch a:hover {
+    color: #267347;
+    text-decoration: underline;
+}
+
+#aanmelden {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 30px 25px;
+    }
+    
+    .auth-header h1 {
+        font-size: 28px;
+    }
+}
+
+
+/* ============================================
+   PROFILE PAGE (profiel_view.php)
+   ============================================ */
+
+body.profile-page {
+    display: block;
+    background-color: rgb(50, 50, 50);
+    min-height: 100vh;
+}
+
+body.profile-page .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 90px 40px 40px;
+    color: white;
+}
+
+body.profile-page .container--card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.profile-page .container--card img {
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+body.profile-page .container--card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+body.profile-page .container--card ul {
+    background-color: rgba(211, 47, 47, 0.2);
+    border: 1px solid #d32f2f;
+    border-radius: 5px;
+    padding: 15px 15px 15px 35px;
+    margin: 20px 0;
+    list-style-position: outside;
+}
+
+body.profile-page .container--card ul li {
+    color: #ff5252;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+body.profile-page .container--card ul li:last-child {
+    margin-bottom: 0;
+}
+
+#gegevens, #partij {
+    color: #2e8b57;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#gegevens:hover, #partij:hover {
+    color: #267347;
+}
+
+#gegevens {
+    margin-top: 10px;
+}
+
+#partij {
+    margin-top: 20px;
+}
+
 #changeinfo {
     display: none;
     width: 100%;
-    max-width: 500px;
-    margin-top: 20px;
-    background-color: #3cb472;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-width: 600px;
+    margin-top: 30px;
+    background-color: #3a3a3a;
+    padding: 30px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 #changeinfo form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
 #changeinfo label {
     font-weight: 600;
+    color: #fff;
     margin-bottom: 4px;
+    font-size: 14px;
+}
+
+#changeinfo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+    font-family: inherit;
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 15px;
+}
+
+#changeinfo select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+    font-family: inherit;
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#changeinfo select option {
+    background: #2e2e2e;
+    color: #fff;
+}
+
+#changeinfo input::placeholder {
+    color: rgba(255,255,255,0.4);
 }
 
 #changeinfo button {
-    margin-top: 8px;
-    padding: 10px;
-    background-color: #2e2e2e;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #2e8b57;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
 }
 
 #changeinfo button:hover {
-    background-color: #1a1a1a;
-}
-
-#gegevens {
-    margin-top: 10px;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#profile {
-    width: 300px;
-    height: 300px;
-    display: block;
-    padding: 20px;
-    color: white;
-    font-weight: bold;
-}
-
-#partij {
-    margin-top: 30px;
-    text-decoration: underline;
+    background-color: #267347;
 }
 
 #maakPartij {
     display: none;
     width: 100%;
     max-width: 600px;
-    min-height: 400px;
-    margin-top: 20px;
-    padding: 25px;
-    background-color: #3cb472;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}r
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #3a3a3a;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
 
 #maakPartij h3 {
     margin-bottom: 20px;
-    color: #2e2e2e;
+    color: #fff;
     font-size: 1.5rem;
+    font-weight: 700;
 }
 
 #maakPartij form {
@@ -312,41 +494,53 @@ a#aanmeldLink:hover {
 
 #maakPartij label {
     font-weight: 600;
-    color: #2e2e2e;
+    color: #fff;
     margin-bottom: 5px;
+    font-size: 14px;
 }
 
 #maakPartij input[type="text"],
 #maakPartij textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #d7dbe6;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 5px;
     font-family: inherit;
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 15px;
+}
+
+#maakPartij input[type="text"]::placeholder,
+#maakPartij textarea::placeholder {
+    color: rgba(255,255,255,0.4);
 }
 
 #maakPartij input[type="file"] {
-    padding: 8px;
-    border: 2px dashed #2e2e2e;
+    padding: 10px;
+    border: 2px dashed rgba(255,255,255,0.2);
     border-radius: 5px;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
 }
 
-#maakPartij #imagePreview {
+#maakPartij #imagePreview, #maakPartij #editImagePreview {
     margin-top: 15px;
     padding: 15px;
-    background-color: rgba(255,255,255,0.3);
-    border-radius: 8px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 5px;
 }
 
-#maakPartij #imagePreview img {
+#maakPartij #imagePreview img, #maakPartij #editImagePreview img {
     max-width: 100%;
     height: auto;
     display: block;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
-#maakPartij #imagePreview button {
+#maakPartij #imagePreview button, #maakPartij #editImagePreview button {
     margin-top: 0;
 }
 
@@ -359,8 +553,8 @@ a#aanmeldLink:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
-    padding: 10px;
-    background-color: rgba(255,255,255,0.3);
+    padding: 15px;
+    background-color: rgba(0,0,0,0.2);
     border-radius: 5px;
 }
 
@@ -370,6 +564,7 @@ a#aanmeldLink:hover {
     gap: 8px;
     font-weight: 500;
     cursor: pointer;
+    color: #fff;
 }
 
 #maakPartij .thema-checkboxes input[type="checkbox"] {
@@ -381,17 +576,26 @@ a#aanmeldLink:hover {
 #maakPartij button {
     margin-top: 10px;
     padding: 12px;
-    background-color: #2e2e2e;
+    background-color: #2e8b57;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
 }
 
 #maakPartij button:hover {
-    background-color: #1a1a1a;
+    background-color: #267347;
+}
+
+#maakPartij button#removeImage, #maakPartij button#removeEditImage {
+    background-color: #d32f2f;
+}
+
+#maakPartij button#removeImage:hover, #maakPartij button#removeEditImage:hover {
+    background-color: #b71c1c;
 }
 
 @media (max-width: 640px) {
@@ -405,32 +609,32 @@ a#aanmeldLink:hover {
     }
 }
 
-/* Mijn Partij Display */
 #mijnPartij {
     display: none;
     width: 100%;
     max-width: 600px;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 30px;
-    background-color: #3cb472;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: #3a3a3a;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 #mijnPartij h3 {
     margin-bottom: 20px;
-    color: #2e2e2e;
+    color: #fff;
     font-size: 1.5rem;
+    font-weight: 700;
 }
 
 #mijnPartij .partij-foto {
     width: 100%;
     max-width: 300px;
     height: auto;
-    border-radius: 8px;
+    border-radius: 5px;
     margin-bottom: 20px;
     display: block;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 #mijnPartij .partij-info {
@@ -439,14 +643,19 @@ a#aanmeldLink:hover {
 
 #mijnPartij .partij-info h4 {
     font-size: 1.4rem;
-    color: #2e2e2e;
+    color: #fff;
     margin-bottom: 15px;
+    font-weight: 600;
 }
 
 #mijnPartij .partij-info p {
     margin-bottom: 10px;
-    color: #2e2e2e;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 1rem;
+}
+
+#mijnPartij .partij-info p strong {
+    color: #fff;
 }
 
 #mijnPartij .partij-actions {
@@ -461,29 +670,34 @@ a#aanmeldLink:hover {
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
 }
 
 #mijnPartij .partij-actions button:not(.delete-btn) {
-    background-color: #2e2e2e;
+    background-color: #2e8b57;
     color: white;
 }
 
 #mijnPartij .partij-actions button:not(.delete-btn):hover {
-    background-color: #1a1a1a;
+    background-color: #267347;
 }
 
 #mijnPartij .partij-actions .delete-btn {
-    background-color: #dc3545;
+    background-color: #d32f2f;
     color: white;
 }
 
 #mijnPartij .partij-actions .delete-btn:hover {
-    background-color: #c82333;
+    background-color: #b71c1c;
 }
 
 @media (max-width: 640px) {
-    #mijnPartij {
+    body.profile-page .container {
+        padding: 80px 20px 30px;
+    }
+    
+    #mijnPartij, #changeinfo, #maakPartij, #pasPartijAanForm {
         max-width: 100%;
         padding: 20px;
     }
@@ -497,21 +711,21 @@ a#aanmeldLink:hover {
     }
 }
 
-/* Pas Partij Aan Form */
 #pasPartijAanForm {
     width: 100%;
     max-width: 600px;
-    margin-top: 20px;
-    padding: 25px;
-    background-color: #3cb472;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #3a3a3a;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 #pasPartijAanForm h3 {
     margin-bottom: 20px;
-    color: #2e2e2e;
+    color: #fff;
     font-size: 1.5rem;
+    font-weight: 700;
 }
 
 #pasPartijAanForm form {
@@ -522,24 +736,35 @@ a#aanmeldLink:hover {
 
 #pasPartijAanForm label {
     font-weight: 600;
-    color: #2e2e2e;
+    color: #fff;
     margin-bottom: 5px;
+    font-size: 14px;
 }
 
 #pasPartijAanForm input[type="text"],
 #pasPartijAanForm textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #d7dbe6;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 5px;
     font-family: inherit;
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 15px;
+}
+
+#pasPartijAanForm input[type="text"]::placeholder,
+#pasPartijAanForm textarea::placeholder {
+    color: rgba(255,255,255,0.4);
 }
 
 #pasPartijAanForm input[type="file"] {
-    padding: 8px;
-    border: 2px dashed #2e2e2e;
+    padding: 10px;
+    border: 2px dashed rgba(255,255,255,0.2);
     border-radius: 5px;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
 }
 
 #pasPartijAanForm textarea {
@@ -551,8 +776,8 @@ a#aanmeldLink:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
-    padding: 10px;
-    background-color: rgba(255,255,255,0.3);
+    padding: 15px;
+    background-color: rgba(0,0,0,0.2);
     border-radius: 5px;
 }
 
@@ -562,6 +787,7 @@ a#aanmeldLink:hover {
     gap: 8px;
     font-weight: 500;
     cursor: pointer;
+    color: #fff;
 }
 
 #pasPartijAanForm .thema-checkboxes input[type="checkbox"] {
@@ -573,18 +799,691 @@ a#aanmeldLink:hover {
 #pasPartijAanForm button {
     margin-top: 10px;
     padding: 12px;
-    background-color: #2e2e2e;
+    background-color: #2e8b57;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
 }
 
 #pasPartijAanForm button:hover {
-    background-color: #1a1a1a;
+    background-color: #267347;
 }
 
-/* partijen page */
+@media (max-width: 640px) {
+    #maakPartij, #pasPartijAanForm {
+        max-width: 100%;
+        padding: 20px;
+    }
+    
+    #maakPartij .thema-checkboxes, #pasPartijAanForm .thema-checkboxes {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ============================================
+   PARTIJEN OVERVIEW PAGE (partijen_view.php)
+   ============================================ */
+
+.partijBody {
+    background-color: rgb(50, 50, 50);
+}
+
+.partijen-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 40px 40px;
+    color: white;
+}
+
+.partijen-container h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.error-message {
+    background-color: #dc3545;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.no-parties {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+.partijen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .partijen-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.partij-card {
+    background-color: #3a3a3a;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.partij-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.partij-card-foto {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.partij-card-no-foto {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, #2e2e2e 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.partij-card-content {
+    padding: 20px;
+}
+
+.partij-card-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.partij-voorzitter {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.partij-ideologie {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 12px;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.partij-themas {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+}
+
+.partij-themas strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.partij-stemmen {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    gap: 10px;
+}
+
+.stem-count {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2e8b57;
+}
+
+.stem-button {
+    padding: 8px 20px;
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.stem-button:hover {
+    background-color: #267347;
+}
+
+@media (max-width: 768px) {
+    .partijen-container {
+        padding: 80px 20px 30px;
+    }
+    
+    .partijen-container h1 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    
+    .partijen-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .partij-card-content {
+        padding: 18px;
+    }
+    
+    .partij-card-content h2 {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* ============================================
+   PARTIJ DETAIL PAGE (partij_detail_view.php)
+   ============================================ */
+
+.detail-hero {
+    background: transparent;
+    padding: 90px 40px 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.detail-back {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.detail-back:hover {
+    opacity: 1;
+}
+
+.detail-content {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 40px;
+    padding: 25px 40px 40px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.detail-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail-img {
+    background: #3a3a3a;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.detail-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-img {
+    color: rgba(255,255,255,0.5);
+    font-size: 16px;
+}
+
+.detail-party-info {
+    text-align: center;
+}
+
+.detail-party-info h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 8px 0;
+}
+
+.detail-voorzitter {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    margin: 0 0 12px 0;
+}
+
+.detail-vote-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #3a3a3a;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.vote-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2e8b57;
+}
+
+.vote-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+}
+
+.detail-right {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.detail-block {
+    background: #3a3a3a;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.detail-block h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 15px 0;
+}
+
+.detail-block p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    margin: 0;
+}
+
+.detail-themas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.thema-tag {
+    background: #2e8b57;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.detail-actions {
+    background: #3a3a3a;
+    padding: 30px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.action-message {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+    text-align: center;
+}
+
+.action-message.success {
+    color: #2e8b57;
+}
+
+.action-message.warning {
+    color: #ff9800;
+}
+
+.action-hint {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+    text-align: center;
+}
+
+.detail-stem-btn {
+    width: 100%;
+    max-width: 300px;
+    background: #2e8b57;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.detail-stem-btn:hover {
+    background: #267347;
+}
+
+.detail-remove-btn {
+    width: 100%;
+    max-width: 300px;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.detail-remove-btn:hover {
+    background: #b71c1c;
+}
+
+.detail-edit-btn, .detail-login-btn {
+    width: 100%;
+    max-width: 300px;
+    background: #555;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.detail-edit-btn:hover, .detail-login-btn:hover {
+    background: #444;
+}
+
+/* Confirmation Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 6px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h3 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    color: #333;
+}
+
+.modal-content p {
+    margin: 0 0 25px 0;
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-cancel {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.modal-cancel:hover {
+    background: #555;
+}
+
+.modal-confirm {
+    background: #2e8b57;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.modal-confirm:hover {
+    background: #267347;
+}
+
+@media (max-width: 900px) {
+    .detail-content {
+        grid-template-columns: 1fr;
+        padding: 30px 20px 40px;
+        gap: 30px;
+    }
+    
+    .detail-hero {
+        padding: 80px 20px 20px 20px;
+    }
+    
+    .detail-left {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .detail-actions {
+        padding: 25px;
+    }
+}
+
+
+/* ============================================
+   STATISTIEKEN PAGE
+   ============================================ */
+
+.stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 40px 40px;
+}
+
+.stats-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.stats-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px 0;
+}
+
+.stats-header p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: #3a3a3a;
+    padding: 30px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #2e8b57;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.chart-btn {
+    background: #3a3a3a;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chart-btn:hover {
+    background: #444;
+    color: #fff;
+}
+
+.chart-btn.active {
+    background: #2e8b57;
+    color: #fff;
+}
+
+.chart-wrapper {
+    background: #3a3a3a;
+    padding: 30px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.chart-controls-inner {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.chart-btn-inner {
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chart-btn-inner:hover {
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.chart-btn-inner.active {
+    background: #2e8b57;
+    color: #fff;
+    border-color: #2e8b57;
+}
+
+.chart-container {
+    width: 100%;
+    min-height: 400px;
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        padding: 80px 20px 30px;
+    }
+    
+    .stats-header h1 {
+        font-size: 28px;
+    }
+    
+    .stat-number {
+        font-size: 36px;
+    }
+    
+    .chart-wrapper {
+        padding: 20px;
+    }
+    
+    .chart-container {
+        min-height: 300px;
+    }
+    
+    .chart-controls {
+        flex-wrap: wrap;
+    }
+}
+
 

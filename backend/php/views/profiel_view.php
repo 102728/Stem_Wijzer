@@ -7,15 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="profile-page">
-    <nav id="navbar" role="navigation" aria-label="Hoofdnavigatie">
-        <a class="brand" href="#">StemWijzer</a>
-        <div class="nav-links">
-            <a href="partijen.php">Partijen</a>
-            <a href="#">Standen</a>
-            <a href="profiel.php">Profiel</a>
-        </div>
-        <img src="scale_logo.png" alt="logo">
-    </nav>
+    <?php include 'views/navbar.php'; ?>
     <div class="container container--card">
         <img src="pfp.png" alt="img" width="80px">
         <h2>Hallo <?= $naam ?>!</h2>
@@ -42,6 +34,19 @@
 
                 <label for="email">E-mailadres</label>
                 <input type="email" name="email" id="email" value="<?= htmlspecialchars($formData['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>" autocomplete="email" required>
+
+                <label for="gemeente">Gemeente</label>
+                <select name="gemeente" id="gemeente" required>
+                    <option value="">Selecteer je gemeente</option>
+                    <?php
+                    $gemeentes = json_decode(file_get_contents('gemeentes.json'), true)['gemeentes'];
+                    $currentGemeente = $formData['gemeente'] ?? '';
+                    foreach ($gemeentes as $gemeente):
+                        $selected = ($gemeente === $currentGemeente) ? 'selected' : '';
+                    ?>
+                        <option value="<?= htmlspecialchars($gemeente) ?>" <?= $selected ?>><?= htmlspecialchars($gemeente) ?></option>
+                    <?php endforeach; ?>
+                </select>
 
                 <label for="wachtwoord">Nieuw wachtwoord</label>
                 <input type="password" name="wachtwoord" id="wachtwoord" autocomplete="new-password" placeholder="Laat leeg om niet te wijzigen">

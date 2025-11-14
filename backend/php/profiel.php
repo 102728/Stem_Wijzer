@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 $errors = $_SESSION['profile_errors'] ?? [];
 unset($_SESSION['profile_errors']);
 
-$stmt = $conn->prepare("SELECT naam, achternaam, email, gebruikersnaam FROM gebruiker WHERE userID = ?");
+$stmt = $conn->prepare("SELECT naam, achternaam, email, gemeente, gebruikersnaam FROM gebruiker WHERE userID = ?");
 $stmt->execute([$user_id]);
 
 if (!$user = $stmt->fetch()) {
@@ -24,12 +24,13 @@ $formData = $_SESSION['profile_data'] ?? $user;
 unset($_SESSION['profile_data']);
 
 // Check if user has a partij
+$voorzitterNaam = $user['naam'] . ' ' . $user['achternaam'];
 $partijStmt = $conn->prepare("SELECT p.*, COUNT(pm.materiaalID) as heeft_foto 
                                FROM partij p 
                                LEFT JOIN partij_materiaal pm ON p.partijID = pm.partijID AND pm.type = 'foto'
                                WHERE p.voorzitter = ? 
                                GROUP BY p.partijID");
-$partijStmt->execute([$user['gebruikersnaam']]);
+$partijStmt->execute([$voorzitterNaam]);
 $userPartij = $partijStmt->fetch();
 
 // Get partij foto if exists
@@ -44,9 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle partij deletion
     if (isset($_POST['verwijder_partij'])) {
         $partijID = $_POST['partij_id'] ?? 0;
+        $voorzitter = $user['naam'] . ' ' . $user['achternaam'];
         try {
             $conn->prepare("DELETE FROM partij WHERE partijID = ? AND voorzitter = ?")
-                 ->execute([$partijID, $user['gebruikersnaam']]);
+                 ->execute([$partijID, $voorzitter]);
             $_SESSION['success'] = "Partij succesvol verwijderd!";
         } catch (PDOException $e) {
             $errors[] = "Fout bij verwijderen: " . $e->getMessage();
@@ -62,11 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $partij_naam = trim($_POST['partij_naam'] ?? '');
         $ideologie = trim($_POST['ideologie'] ?? '');
         $themas = isset($_POST['themas']) ? implode(', ', $_POST['themas']) : '';
+        $voorzitter = $user['naam'] . ' ' . $user['achternaam'];
 
         try {
             // Update partij info
             $conn->prepare("UPDATE partij SET partij_naam = ?, ideologie = ?, themas = ? WHERE partijID = ? AND voorzitter = ?")
-                 ->execute([$partij_naam, $ideologie, $themas, $partijID, $user['gebruikersnaam']]);
+                 ->execute([$partij_naam, $ideologie, $themas, $partijID, $voorzitter]);
 
             // Handle new foto if uploaded
             if (isset($_FILES['partij_foto']) && $_FILES['partij_foto']['error'] === UPLOAD_ERR_OK) {
@@ -99,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $partij_naam = trim($_POST['partij_naam'] ?? '');
         $ideologie = trim($_POST['ideologie'] ?? '');
         $themas = isset($_POST['themas']) ? implode(', ', $_POST['themas']) : '';
-        $voorzitter = $user['gebruikersnaam'];
+        $voorzitter = $user['naam'] . ' ' . $user['achternaam'];
 
         // Handle file upload
         if (isset($_FILES['partij_foto']) && $_FILES['partij_foto']['error'] === UPLOAD_ERR_OK) {
@@ -138,7 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formData = [
         'naam' => trim($_POST['naam'] ?? ''),
         'achternaam' => trim($_POST['achternaam'] ?? ''),
-        'email' => strtolower(trim($_POST['email'] ?? ''))
+        'email' => strtolower(trim($_POST['email'] ?? '')),
+        'gemeente' => trim($_POST['gemeente'] ?? '')
     ];
     $wachtwoord = $_POST['wachtwoord'] ?? '';
     $herhaal = $_POST['herhaalwachtwoord'] ?? '';
@@ -156,8 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $conn->prepare("UPDATE gebruiker SET naam = ?, achternaam = ?, email = ? WHERE userID = ?")
-             ->execute([$formData['naam'], $formData['achternaam'], $formData['email'], $user_id]);
+        $conn->prepare("UPDATE gebruiker SET naam = ?, achternaam = ?, email = ?, gemeente = ? WHERE userID = ?")
+             ->execute([$formData['naam'], $formData['achternaam'], $formData['email'], $formData['gemeente'], $user_id]);
 
         if ($wachtwoord !== '') {
             $conn->prepare("UPDATE gebruiker SET wachtwoord = ? WHERE userID = ?")
@@ -173,4 +177,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $naam = htmlspecialchars($formData['naam'] ?: 'Bezoeker');
-include "profiel_view.php";
+include "views/profiel_view.php";

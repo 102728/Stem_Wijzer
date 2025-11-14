@@ -58,6 +58,30 @@ function main() {
             }
         });
     }
+
+    // Navbar hide/show on scroll
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        let lastScrollTop = 0;
+        let scrollTimeout;
+
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down & past threshold
+                    navbar.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    navbar.classList.remove('hidden');
+                }
+                
+                lastScrollTop = scrollTop;
+            }, 10);
+        });
+    }
 }
 main();
 
@@ -134,7 +158,8 @@ if (pasPartijAanBtn && pasPartijAanForm && mijnPartijDisplay) {
     });
 }
 
-function showToast(message, type = 'error') {
+// Toast notification function
+function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     if (!toast) return;
     

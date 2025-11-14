@@ -21,11 +21,12 @@ if (isset($_POST['signsubmit'])) {
             if ($existing['email'] === $email) $errors[] = "Dit e-mailadres is al in gebruik.";
             if ($existing['gebruikersnaam'] === $gebruikersnaam) $errors[] = "Deze gebruikersnaam is al in gebruik.";
         } else {
-            $stmt = $conn->prepare("INSERT INTO gebruiker (naam, achternaam, email, gebruikersnaam, wachtwoord) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO gebruiker (naam, achternaam, email, gemeente, gebruikersnaam, wachtwoord) VALUES (?, ?, ?, ?, ?, ?)");
             if ($stmt->execute([
                 trim($_POST['naam']), 
                 trim($_POST['achternaam']), 
                 $email,
+                trim($_POST['gemeente'] ?? ''),
                 $gebruikersnaam, 
                 password_hash($_POST['wachtwoord'], PASSWORD_BCRYPT)
             ])) {
@@ -56,4 +57,4 @@ elseif (isset($_POST['logsubmit'])) {
 }
 
 $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-include "index_view.php";
+include "views/index_view.php";
