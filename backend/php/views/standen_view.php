@@ -17,8 +17,8 @@
     <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8" defer></script>
 
     <link rel="stylesheet" href="./style.css">
-    <script src="../../frontend/js/script.js" defer></script>
-    <script src="../../frontend/js/graphs.js" defer></script>
+    <script src="./js/script.js" defer></script>
+    <script src="./js/graphs.js" defer></script>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
 
             </ul>
         </div>
-        <img src="../../frontend/media/logo/scale_logo.png" alt="logo" width="50px" height="50px" class="d-inline-block align-text-top">
+        <img src="./media/logo/scale_logo.png" alt="logo" width="50px" height="50px" class="d-inline-block align-text-top">
     </div>
 </nav>
 
