@@ -9,4 +9,4 @@ $success = '';
 
 
 $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-include "standen_view.php";
+include "views/standen_view.php";

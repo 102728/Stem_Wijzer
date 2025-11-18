@@ -17,7 +17,7 @@
     <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8" defer></script>
 
     <link rel="stylesheet" href="./style.css">
-    <script src="../../js/script.js" defer></script>
+    <script src="./js/script.js" defer></script>
     <script src="./js/graphs.js" defer></script>
 </head>
 

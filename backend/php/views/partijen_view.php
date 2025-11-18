@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="partijBody">
-    <?php include 'navbar.php'; ?>
+    <?php include 'views/navbar.php'; ?>
     
     <div id="toast" class="toast"></div>
     

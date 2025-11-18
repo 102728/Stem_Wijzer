@@ -10,7 +10,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body class="partijBody">
-    <?php include 'navbar.php'; ?>
+    <?php include 'views/navbar.php'; ?>
 
     <div class="stats-container">
         <div class="stats-header">
