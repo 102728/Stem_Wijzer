@@ -122,6 +122,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $conn->prepare("INSERT INTO partij_materiaal (partijID, type, bestand_naam, bestand_type, bestand_data, grootte) VALUES (?, 'foto', ?, ?, ?, ?)");
                 $stmt->execute([$partijID, $bestand_naam, $bestand_type, $bestand_data, $grootte]);
 
+                // Zet partij = true voor deze gebruiker
+                $stmt = $conn->prepare("UPDATE gebruiker SET partij = true WHERE userID = ?");
+                $stmt->execute([$_SESSION['userID']]);
+
                 $_SESSION['success'] = "Partij succesvol aangemaakt!";
             } catch (PDOException $e) {
                 $errors[] = "Fout bij aanmaken partij: " . $e->getMessage();

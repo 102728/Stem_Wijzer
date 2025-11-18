@@ -26,12 +26,12 @@ function main() {
 
     if (gegevensTrigger && changeInfoPanel) {
         gegevensTrigger.addEventListener("click", () => {
-            if (changeInfoPanel.style.display === "flex") {
+            if (changeInfoPanel.style.display === "block") {
                 changeInfoPanel.style.display = "none";
                 // Show mijnPartij again if it exists
                 if (mijnPartijPanel) mijnPartijPanel.style.display = "block";
             } else {
-                changeInfoPanel.style.display = "flex";
+                changeInfoPanel.style.display = "block";
                 if (maakPartijPanel) maakPartijPanel.style.display = "none";
                 if (mijnPartijPanel) mijnPartijPanel.style.display = "none";
             }
